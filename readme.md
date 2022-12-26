@@ -3,7 +3,7 @@
   <img src="Images/jamesbond.jpeg">
 </p>
 
-NER is a task in NLP that aims to extract entities in a text. An entity can be a person, city, country, etc., and can comprise of a single or multiple words.
+NER is a task in NLP that aims to extract entities in a text. An entity can be a person, city, country, etc., and can comprise of a single ("James") or multiple words ("James Bond").
 
 This is a project on named entity recognition using HuggingFace's DistilBert model. The DistilBert model was proposed as a smaller, faster and lighter (i.e. 'distilled') version of BERT, preserving over 95% of BERT's performance while reducing the number of parameters by 40% and running faster by 60% (https://arxiv.org/abs/1910.01108)
 
