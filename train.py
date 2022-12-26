@@ -10,16 +10,29 @@ from transformers import DistilBertForTokenClassification
 import config as c
 from utils import get_device, load_model
 
+import json
 import argparse
 
 #Instantiate parser
 parser = argparse.ArgumentParser()
 
 #Required parameters
-parser.add_argument("--batch", type = int, required = False)
-parser.add_argument("--epochs", type = int, required = False)
-parser.add_argument("--lr", type = float, required = False)
-parser.add_argument("--path", type = str, required = False)
+parser.add_argument("--batch", 
+                    type = int, 
+                    required = False,
+                    help = "Batch size for model training. Default batch size = 2")
+parser.add_argument("--epochs", 
+                    type = int, 
+                    required = False,
+                    help = 'Number of epochs for training. Default = 5')
+parser.add_argument("--lr", 
+                    type = float, 
+                    required = False,
+                    help = 'Learning rate for training. Default = 1e-3')
+parser.add_argument("--path", 
+                    type = str, 
+                    required = False,
+                    help = 'Path to directory containing model weights. Default = ner.csv')
 
 args = parser.parse_args()
 
@@ -65,6 +78,9 @@ print(f'Number of unique labels: {len(unique_labels)}')
 
 labels_to_ids = {k:v for v, k in enumerate(sorted(unique_labels))}
 ids_to_labels = {v:k for v, k in enumerate(sorted(unique_labels))}
+
+with open('ids_to_labels.json', 'w') as outfile:
+    json.dump(ids_to_labels, outfile)
 
 ### Definitions of functions and models ###
 def align_labels(texts, 
@@ -250,7 +266,7 @@ def train(model, df_train, df_val, batch_size = BATCH_SIZE,
         
         if val_accuracy > best_acc and val_loss < best_loss:
             best_acc, best_loss = val_accuracy, val_loss
-            torch.save(model.state_dict(), "best_model.pt")
+            torch.jit.save(model, "best_model.pt")
 
 def evaluate(model, df_test):
     test_dataset = DataSequence(df_test)
@@ -281,6 +297,6 @@ model = DistilBertModel()
 train(model, df_train, df_val)
 print('Final model saved!')
 
-final_model = load_model(DistilBertModel, 'best_model.pt')
+final_model = load_model('best_model.pt', model_class =DistilBertModel)
 
 evaluate(final_model, df_test)
