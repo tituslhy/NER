@@ -1,5 +1,5 @@
 import torch
-from transformers import BertForTokenClassification
+from transformers import DistilBertForTokenClassification
 
 import config as c
 from utils import train, evaluate, load_model
@@ -8,7 +8,7 @@ from getdata import df_train, df_val, df_test, unique_labels
 class BertModel(torch.nn.Module):
     def __init__(self):
         super(BertModel, self).__init__()
-        self.bert = BertForTokenClassification.from_pretrained('bert-base-uncased',
+        self.bert = DistilBertForTokenClassification.from_pretrained('bert-base-uncased',
                                                                num_labels = len(unique_labels))
     def forward(self, input_id, mask, label):
         output = self.bert(input_ids = input_id, 

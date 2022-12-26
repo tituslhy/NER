@@ -1,8 +1,8 @@
-from transformers import BertTokenizerFast
+from transformers import DistilBertTokenizerFast
 
 BATCH_SIZE = 2
-EPOCHS = 5
+EPOCHS = 3
 LEARNING_RATE = 0.0001
-TOKENIZER = BertTokenizerFast.from_pretrained('bert-base-uncased')
+TOKENIZER = DistilBertTokenizerFast.from_pretrained('bert-base-uncased')
 SEED = 2022
 PATH = 'ner.csv'
