@@ -4,6 +4,7 @@ from transformers import BertForTokenClassification
 import config as c
 from utils import train, evaluate, load_model
 from getdata import df_train, df_val, df_test, unique_labels
+
 class BertModel(torch.nn.Module):
     def __init__(self):
         super(BertModel, self).__init__()
