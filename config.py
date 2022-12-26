@@ -9,5 +9,6 @@ UNIQUE_LABELS = 17 #global configuration
 SEED = 2022
 PATH = 'ner.csv'
 
+# Used to run inference
 with open('ids_to_labels.json','r') as file:
     IDS_TO_LABELS = json.load(file)

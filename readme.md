@@ -1,1 +1,1 @@
-This is a project on named entity recognition using NLP techniques.
+This is a project on named entity recognition using HuggingFace's DistilBert model!
