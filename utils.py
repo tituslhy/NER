@@ -4,6 +4,7 @@ from torch.optim import Adam
 from tqdm import tqdm
 
 import config as c
+from getdata import labels_to_ids
 
 BATCH_SIZE = c.BATCH_SIZE
 EPOCHS = c.EPOCHS
@@ -25,10 +26,9 @@ def load_model(model_class, name, device=None):
     model.load_state_dict(torch.load(name, map_location=get_device()))
     model.to(get_device())
     return model
-
 def align_labels(texts, 
                  labels, 
-                 labels_to_ids, 
+                 labels_to_ids = labels_to_ids, 
                  label_all_tokens = False, 
                  tokenizer = TOKENIZER):
     """
@@ -94,7 +94,7 @@ class DataSequence(torch.utils.data.Dataset):
         batch_labels = self.get_batch_labels(idx)
         
         return batch_data, batch_labels
-
+    
 def train(model, df_train, df_val, batch_size = BATCH_SIZE,
           epochs = EPOCHS, learning_rate = LEARNING_RATE):
     """Function to finetune BERT model
