@@ -1,6 +1,6 @@
 ## Named entity recognition (NER)
 <p align="center">
-  <img src="images/jamesbond.jpeg">
+  <img src="Images/jamesbond.jpeg">
 </p>
 
 NER is a task in NLP that aims to extract entities in a text. An entity can be a person, city, country, etc., and can comprise of a single or multiple words.
