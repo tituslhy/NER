@@ -32,7 +32,7 @@ parser.add_argument("--lr",
 parser.add_argument("--path", 
                     type = str, 
                     required = False,
-                    help = 'Path to directory containing model weights. Default = ner.csv')
+                    help = 'Path to directory containing model weights. Default = ./Data/ner.csv')
 
 args = parser.parse_args()
 
@@ -79,7 +79,7 @@ print(f'Number of unique labels: {len(unique_labels)}')
 labels_to_ids = {k:v for v, k in enumerate(sorted(unique_labels))}
 ids_to_labels = {v:k for v, k in enumerate(sorted(unique_labels))}
 
-with open('ids_to_labels.json', 'w') as outfile:
+with open('./Data/ids_to_labels.json', 'w') as outfile:
     json.dump(ids_to_labels, outfile)
 
 ### Definitions of functions and models ###
