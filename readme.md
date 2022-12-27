@@ -7,7 +7,7 @@ NER is a task in NLP that aims to extract entities in a text. An entity can be a
 
 This is a NER project using HuggingFace's pre-trained DistilBert model. The DistilBert model was proposed as a smaller, faster and lighter (i.e. 'distilled') version of BERT, preserving over 95% of BERT's performance while reducing the number of parameters by 40% and running faster by 60% (https://arxiv.org/abs/1910.01108)
 
-This project is a personal endeavor to learn more about the domain of NLP by doing, and closely follows the code and elaboration of the Medium article https://towardsdatascience.com/named-entity-recognition-with-bert-in-pytorch-a454405e0b6a 
+This project is a personal endeavor to learn more about the domain of NLP by doing, and closely follows the code and elaboration of the notebook in the Medium article https://towardsdatascience.com/named-entity-recognition-with-bert-in-pytorch-a454405e0b6a. The notebook has been re-worked to .py files.
 
 ## The approach
 1. Tokenize text
