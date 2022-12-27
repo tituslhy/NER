@@ -266,7 +266,7 @@ def train(model, df_train, df_val, batch_size = BATCH_SIZE,
         
         if val_accuracy > best_acc and val_loss < best_loss:
             best_acc, best_loss = val_accuracy, val_loss
-            torch.jit.save(model, "best_model.pt")
+            torch.save(model, "best_model.pt")
 
 def evaluate(model, df_test):
     test_dataset = DataSequence(df_test)
