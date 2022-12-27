@@ -33,7 +33,9 @@ python3 train.py --batch 4 --epochs 5 --lr 0.01 --path data.csv
 ```
 
 ## Using the model to run inferences
-Key in the sentence/s of interest!
+The flags of the python3 run are:
+1. --txts: This is the sentence of interest and is a required argument
+2. --pretrained: Boolean. Defaults to False. If True, the script looks within the directory for "best_model.pt". Otherwise it uses the pretrained DistilBert model to run inference.
 ```
-python3 inference.py --txts Bill Gates is the founder of Microsoft
+python3 inference.py --txts "Bill Gates is the founder of Microsoft" --pretrained True
 ```

@@ -13,7 +13,6 @@ def load_model(name, model_class, device = None):
     Args:
         name (_type_): _description_
         model_class (_type_, optional): _description_. Defaults to None.
-        jit (bool, optional): _description_. Defaults to False.
         device (_type_, optional): _description_. Defaults to None.
 
     Raises:

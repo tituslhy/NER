@@ -11,10 +11,19 @@ parser.add_argument('--txts',
                     type = str, 
                     required = True,
                     help = "Sentence to run model inference")
+parser.add_argument('--pretrained',
+                    type = str,
+                    choices = ("True", "False"),
+                    required = False,
+                    help = "True/False flag on whether to use pre-trained model or finetuned model")
 args = parser.parse_args()
 
 ### Instantiate configuration
 SENTENCE = args.txts
+if args.pretrained == "True":
+    PRETRAINED = True
+else:
+    PRETRAINED = False
 TOKENIZER = c.TOKENIZER
 UNIQUE_LABELS = c.UNIQUE_LABELS
 IDS_TO_LABELS = c.IDS_TO_LABELS
@@ -66,7 +75,7 @@ class DistilBertModel(torch.nn.Module):
     def __init__(self, unique_labels = UNIQUE_LABELS):
         super(DistilBertModel, self).__init__()
         self.bert = DistilBertForTokenClassification.from_pretrained('distilbert-base-uncased',
-                                                               num_labels = len(unique_labels))
+                                                               num_labels = UNIQUE_LABELS)
     def forward(self, input_id, mask, label):
         output = self.bert(input_ids = input_id, 
                            attention_mask = mask,
@@ -74,7 +83,10 @@ class DistilBertModel(torch.nn.Module):
                            return_dict = False)
         return output
 
-model = load_model('best.pt', model_class = DistilBertModel)
+if PRETRAINED == False:
+    model = load_model('best.pt', model_class = DistilBertModel)
+else:
+    model = DistilBertModel()
 
 def evaluate_one_text(model, 
                       sentence = SENTENCE, 
@@ -88,7 +100,7 @@ def evaluate_one_text(model,
         tokenizer (class): Tokenizer for sentence tokenization. 
         ids_to_labels (dictionary): Defaults to ids_to_labels in the ner.csv file.
     """
-    device = get_device()
+    device = 'cpu'
     text = tokenizer(sentence, padding = 'max_length',
                      max_length = 512, truncation = True,
                      return_tensors = 'pt')
@@ -100,6 +112,8 @@ def evaluate_one_text(model,
     logits_clean = logits[0][label_ids != -100]
     
     predictions = logits_clean.argmax(dim = 1).tolist()
-    prediction_label = [ids_to_labels[i] for i in predictions]
-    print(sentence)
-    print(prediction_label)    
+    prediction_label = [ids_to_labels[str(i)] for i in predictions]
+    print(f'\nSentence of consideration: {sentence}')
+    print(f'\nPredicted labels: {prediction_label}')
+
+evaluate_one_text(model)    
