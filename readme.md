@@ -37,5 +37,5 @@ The flags of the python3 run are:
 1. --txts: This is the sentence of interest and is a required argument
 2. --pretrained: Boolean. Defaults to False. If True, the script looks within the directory for "best_model.pt". Otherwise it uses the pretrained DistilBert model to run inference.
 ```
-python3 inference.py --txts "Bill Gates is the founder of Microsoft" --pretrained True
+python3 inference.py --txts "Bill Gates is the founder of Microsoft" --pretrained "True"
 ```
