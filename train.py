@@ -7,8 +7,8 @@ from torch.optim import Adam
 from tqdm import tqdm
 from transformers import DistilBertForTokenClassification
 
-import config as c
-from utils import get_device, load_model
+import utils.config as c
+from utils.utils import get_device, load_model
 
 import json
 import argparse
