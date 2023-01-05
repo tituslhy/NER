@@ -27,7 +27,7 @@ The flags of the python3 run are:
 1. --batch: batch size. Defaults to 2
 2. --epochs: Number of training epochs. Defaults to 3.
 3. --lr: Learning rate. Defaults to 1e-3.
-4. --path: Path for data. Defaults to ner.csv
+4. --path: Path for data. Defaults to './Data/ner.csv'
 ```
 python3 train.py --batch 4 --epochs 5 --lr 0.01 --path data.csv
 ```
